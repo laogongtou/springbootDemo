@@ -1,0 +1,52 @@
+spring:
+
+  # 配置Dubbo
+  dubbo:
+    application:            #应用配置，用于配置当前应用信息，不管该应用是提供者还是消费者。
+      name: Consumer
+    registry:                 #注册中心配置，用于配置连接注册中心相关信息。
+      address: zookeeper://39.96.30.162:2181
+    protocol:     #协议配置，用于配置提供服务的协议信息，协议由提供方指定，消费方被动接受。
+      name: dubbo
+      port: 20880
+    scan: com.springboot.demo.service  #服务暴露与发现消费所在的package
+
+  # 配置mybatis-plus
+  mybatis-plus:
+    # 配置扫描xml
+    mapper-locations:
+      - classpath:mapper/*.xml
+    # 实体扫描，多个package用逗号或者分号分隔
+    type-aliases-package: com.springboot.demo.entity
+    global-config:
+      # 逻辑删除配置
+      logic-delete-value: 0
+      logic-not-delete-value: 1
+      sql-injector: com.baomidou.mybatisplus.mapper.LogicSqlInjector
+
+  # 配置 redis
+  redis:
+    host: 39.96.30.162
+    password: Up72_2006_redis~!@#$
+    port: 6379
+    jedis:
+      pool:
+        #最大连接数
+        max-active: 8
+        #最大阻塞等待时间(负数表示没限制)
+        max-wait: -1
+        #最大空闲
+        max-idle: 8
+        #最小空闲
+        min-idle: 0
+      #连接超时时间
+      timeout: 10000
+
+  #    配置activemq
+  activemq:
+    user: admin
+    password: admin
+    broker-url: tcp://39.96.30.162:61616
+    pool:
+      enabled: false
+      max-connections: 10
